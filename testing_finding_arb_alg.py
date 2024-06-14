@@ -39,11 +39,11 @@ print(f'Execution time: {execution_time} milliseconds')
 print(len(odds_combinations))
 
 # Check each combination for arbitrage opportunities
-# for combination in odds_combinations:
-#     is_arbitrage, stakes, profit = detect_arbitrage(combination)
-#     if is_arbitrage:
-#         print(f"Arbitrage opportunity detected with odds {combination}")
-#         print(f"Stakes to place: {stakes}")
-#         print(f"Guaranteed profit: ${profit:.2f}")
-# else:
-#     print(f"No arbitrage opportunity with odds {combination}")
+for combination in odds_combinations:
+    is_arbitrage, stakes, profit = detect_arbitrage(combination)
+    if is_arbitrage:
+        print(f"Arbitrage opportunity detected with odds {combination}")
+        print(f"Stakes to place: {stakes}")
+        print(f"Guaranteed profit: ${profit:.2f}")
+else:
+    print(f"No arbitrage opportunity with odds {combination}")
