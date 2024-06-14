@@ -1,0 +1,20 @@
+Back-of-the-envelope calculations
+
+Worst case:
+
+> there are 175 active bookmakers in the world.
+> each match (with outcomes of 3. 3 is the max outcome we are supporting).
+> this will use an avg of 42mb worth of possible combinations (this is a rough estimate) for a single match.
+> On avg (a very rough estimate) we will be doing 500 matches per 5 minutes!
+> this summates to 21GB of data every 5 minutes
+
+NB: THIS IS WORST CASE. this is because we arent supporting 175 bookies
+
+
+AVERAGE CASE:
+
+> We'll have 3 bookmakers
+> each match (with outcomes of 3. 3 is the max outcome we are supporting).
+> this will use an avg of 0.312 KB worth of possible combinations (this is a rough estimate) for a single match.
+> On avg (a very rough estimate) we will be doing 500 matches per 5 minutes!
+> this summates to 156 KB of data every 5 minutes
