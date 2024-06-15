@@ -18,3 +18,9 @@ AVERAGE CASE:
 > this will use an avg of 0.312 KB worth of possible combinations (this is a rough estimate) for a single match.
 > On avg (a very rough estimate) we will be doing 500 matches per 5 minutes!
 > this summates to 156 KB of data every 5 minutes
+
+We gonn' need to optimize fetching pages:
+    1. store links to the target page, so as to go there directly
+
+
+c1e68840-60e0-46a1-90b6-48570c4620cf

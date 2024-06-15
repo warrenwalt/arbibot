@@ -8,19 +8,18 @@ import time
 
 driver = webdriver.Chrome()
 
-driver.get("https://google.com")
+driver.get("https://www.bet365.com/#/HO/")
+time.sleep(20)
 
-clickable = driver.find_element(By.TAG_NAME, "textarea")
+clickable = driver.find_element(
+    By.CLASS_NAME, "hm-MainHeaderRHSLoggedOutWide_Join")
 ActionChains(driver)\
     .move_to_element(clickable)\
     .pause(1)\
     .click()\
-    .pause(1)\
-    .send_keys("Lionel Messi" + Keys.ENTER)\
-    .pause(1)\
     .perform()
 
 
-time.sleep(10)
+time.sleep(60)
 
 driver.close()

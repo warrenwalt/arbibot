@@ -19,19 +19,21 @@ def detect_arbitrage(odds_combination, total_investment=100):
 
 
 odds_combinations = [
-    (['Betika', 'Betika', 'Betika'], [1.2, 2.44, 6.0]),
-    (['Betika', 'Betika', 'SportPesa'], [1.2, 2.44, 10.03]),
-    (['Betika', 'SportPesa', 'Betika'], [1.2, 1.9, 6.0]),
-    (['Betika', 'SportPesa', 'SportPesa'], [1.2, 1.9, 10.03]),
-    (['SportPesa', 'Betika', 'Betika'], [1.5, 2.44, 6.0]),
-    (['SportPesa', 'Betika', 'SportPesa'], [1.5, 2.44, 10.03]),
-    (['SportPesa', 'SportPesa', 'Betika'], [1.5, 1.9, 6.0]),
-    (['SportPesa', 'SportPesa', 'SportPesa'], [1.5, 1.9, 10.03])
+    (['Betika', 'Betika', 'Betika'], [1.9, 4.5, 5.5]),
+    (['Betika', 'Betika', 'SportPesa'], [1.9, 4.5, 3.6]),
+    (['Betika', 'SportPesa', 'Betika'], [1.9, 3.3, 5.5]),
+    (['Betika', 'SportPesa', 'SportPesa'], [1.9, 3.3, 3.6]),
+    (['SportPesa', 'Betika', 'Betika'], [2.1, 4.5, 5.5]),
+    (['SportPesa', 'Betika', 'SportPesa'], [2.1, 4.5, 3.6]),
+    (['SportPesa', 'SportPesa', 'Betika'], [2.1, 3.3, 5.5]),
+    (['SportPesa', 'SportPesa', 'SportPesa'], [2.1, 3.3, 3.6])
 ]
 
 
 for combination in odds_combinations:
-    is_arbitrage, stakes, profit, book_makers = detect_arbitrage(combination)
+    is_arbitrage, stakes, profit, book_makers = detect_arbitrage(
+        combination)
+
     if is_arbitrage:
         print(f"Arbitrage opportunity detected with odds {combination}")
         print(f"Stakes to place: {stakes}")
