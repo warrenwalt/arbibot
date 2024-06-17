@@ -92,6 +92,18 @@ def double_chance(dc):
         odd = game.find_element(By.CLASS_NAME, 'prebet-match__odds__container')
         dc.append(odd.text)
 
+# Clean and convert the 'DC' column
+
+
+def clean_dc(dc_list):
+    x2 = dc_list[-1]
+    x_12 = dc_list[-2]
+
+    dc_list[-1] = x_12
+    dc_list[-2] = x2
+
+    return [float(i) if isinstance(i, str) and i.isdigit() else i for i in dc_list]
+
 
 # scroll_page()
 x_12(x12)
@@ -123,8 +135,9 @@ df_betika['BTTS'] = df_betika['BTTS'].apply(lambda x: [float(i) for i in x])
 
 # change dc to array of floats
 df_betika['DC'] = df_betika['DC'].str.split('\n')
-df_betika['DC'] = df_betika['DC'].apply(
-    lambda x: [float(x[0]), float(x[2]), float(x[1])])
+df_betika['DC'] = df_betika['DC'].apply(clean_dc)
+
+df_betika.set_index('Teams', inplace=True)
 
 '''SAVE DATA'''
 df_betika.to_csv('betika.csv', index=False)

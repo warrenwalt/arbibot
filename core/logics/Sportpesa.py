@@ -9,12 +9,18 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
 import time
 
-driver = webdriver.Chrome()
+# Initialize Chrome options
+options = webdriver.ChromeOptions()
+options.add_argument('--headless')  # Run Chrome in headless mode
+options.add_argument('--disable-gpu')  # Disable GPU acceleration
+options.add_argument('--disable-infobars')  # Disable infobars
+# Set window size to a specific resolution
+options.add_argument('--window-size=1920,1080')
+
+# Initialize the WebDriver with the options
+driver = webdriver.Chrome(options=options)
 
 driver.get("https://www.ke.sportpesa.com/en/sports-betting/football-1/")
-
-# maximize the window
-driver.maximize_window()
 
 # wait for page to load
 try:
@@ -47,9 +53,6 @@ for match in matches:
     x12.append(odds[0].text)
 
     # btts
-    # bt = odds[3].find_element(By.CLASS_NAME, 'ng-binding')
-    # print(bt.text)
-    # print('------------------')
     btts.append(odds[3].text)
 
     # dc
@@ -73,15 +76,22 @@ df['Teams'] = df['Teams'].str.replace('\n', ' v ').str.lower()
 # change 3-way to array of floats
 df['3-Way'] = df['3-Way'].str.split('\n')
 df['3-Way'] = df['3-Way'].apply(lambda x: [float(i)
-                                if isinstance(i, str) and len(x) > 1 else i for i in x])
+                                if isinstance(i, str) and i.isdigit() else i for i in x])
+
+# change btts to array of floats
+df['BTTS'] = df['BTTS'].str.split('\n')
+df['BTTS'] = df['BTTS'].apply(lambda x: [float(i)
+                                         if isinstance(i, str) and i.isdigit() else i for i in x])
 
 # change dc to array of floats
 df['DC'] = df['DC'].str.split('\n')
 df['DC'] = df['DC'].apply(
-    lambda x: [float(i) if isinstance(i, str) and len(x) > 1 else i for i in x])
+    lambda x: [float(i) if isinstance(i, str) and i.isdigit() else i for i in x])
+
+df.set_index('Teams', inplace=True)
 
 
 '''SAVE DATA'''
 df.to_csv('sportpesa.csv', index=False)
-# print(df)
+print(df)
 print(len(btts))
